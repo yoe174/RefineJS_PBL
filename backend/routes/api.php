@@ -28,8 +28,10 @@ Route::patch('/role/{id}', [roleController::class, 'update']);
 Route::delete('/role/{id}', [roleController::class, 'destroy']);
 
 use App\Http\Controllers\Api\informasiController;
+
 Route::get('/informasi', [informasiController::class, 'index']);
 Route::post('/informasi', [informasiController::class, 'store']); // untuk upload
 Route::get('/informasi/{id}', [informasiController::class, 'show']);
-Route::patch('/informasi/{id}', [informasiController::class, 'update']); // disesuaikan dengan refine
+Route::put('/informasi/{id}', [informasiController::class, 'update']); // disesuaikan dengan refine
+Route::patch('/informasi/{id}', [informasiController::class, 'update']);
 Route::delete('/informasi/{id}', [informasiController::class, 'destroy']);

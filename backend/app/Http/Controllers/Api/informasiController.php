@@ -54,27 +54,28 @@ class informasiController extends Controller
         $informasi = informasiModel::findOrFail($id);
 
         $request->validate([
-            'judul' => 'sometimes|required|string|max:255',
-            'isi' => 'sometimes|required',
-            'status' => 'sometimes|required|in:aktif,arsip',
+            'judul' => 'required|string|max:255',
+            'isi' => 'required',
+            'status' => 'required|in:aktif,arsip',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        $data = [];
+        $data = [
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'status' => $request->status,
+        ];
 
-        if ($request->has('judul')) {
-            $data['judul'] = $request->judul;
-        }
-
-        if ($request->has('isi')) {
-            $data['isi'] = $request->isi;
-        }
-
-        if ($request->has('status')) {
-            $data['status'] = $request->status;
+        // Hapus gambar jika ada flag remove_image dan tidak upload gambar baru
+        if ($request->has('remove_image') && !$request->hasFile('image')) {
+            if ($informasi->image && Storage::disk('public')->exists($informasi->image)) {
+                Storage::disk('public')->delete($informasi->image);
+            }
+            $data['image'] = null;
         }
 
         if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
             if ($informasi->image && Storage::disk('public')->exists($informasi->image)) {
                 Storage::disk('public')->delete($informasi->image);
             }
@@ -82,9 +83,7 @@ class informasiController extends Controller
             $data['image'] = $request->file('image')->store('informasi', 'public');
         }
 
-        if (!empty($data)) {
-            $informasi->update($data);
-        }
+        $informasi->update($data);
 
         return response()->json([
             'message' => 'Informasi berhasil diperbarui.',
