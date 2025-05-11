@@ -23,12 +23,10 @@
       }
     ],
     "paths": {
-      "@*": [
-        "./src/*"
-      ],
-      "@pages/*": [
-        "./pages/*"
-      ]
+      "@/*": ["./src/*"],
+      "@pages/*": ["./pages/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@providers/*": ["./src/providers/*"]
     },
     "incremental": true
   },
