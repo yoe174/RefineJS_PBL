@@ -15,24 +15,23 @@ export default function InformasiEdit() {
 
   useEffect(() => {
     if (informasi?.image) {
-      setFileList([
+      const formattedImage: UploadFile[] = [
         {
           uid: "-1",
           name: informasi.image,
-          status: "done",
+          status: "done" as const,
           url: `${process.env.NEXT_PUBLIC_API_URL}/storage/${informasi.image}`,
         },
-      ]);
-      form.setFieldsValue({ image: [
-        {
-          uid: "-1",
-          name: informasi.image,
-          status: "done",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/storage/${informasi.image}`,
-        },
-      ]});
+      ];
+  
+      setFileList(formattedImage);
+      form.setFieldsValue({ image: formattedImage }); // pastikan image field tetap berupa array
+    } else {
+      setFileList([]);
+      form.setFieldsValue({ image: [] }); // jaga konsistensi, harus tetap array kosong
     }
   }, [informasi, form]);
+  
 
   const handleFinish = async (values: any) => {
     const formData = new FormData();
@@ -40,13 +39,21 @@ export default function InformasiEdit() {
     formData.append("isi", values.isi);
     formData.append("status", values.status);
 
-    // const file = values.image?.[0]?.originFileObj;
     const imageList = Array.isArray(values.image) ? values.image : [];
     const file = imageList[0]?.originFileObj;
+
+    // Cek apakah Admin benar-benar ingin menghapus gambar
+    const isRemovingImage = imageList.length === 0 && informasi?.image;
+
     if (file) {
       formData.append("image", file);
-    } else {
-      // Kalau user tidak upload gambar baru, kita anggap dia menghapus gambar
+    } else if (isRemovingImage) {
+      formData.append("remove_image", "true");
+    }
+
+    if (imageList.length > 0 && imageList[0]?.originFileObj) {
+      formData.append("image", imageList[0].originFileObj);
+    } else if (imageList.length === 0) {
       formData.append("remove_image", "true");
     }
 
@@ -73,7 +80,11 @@ export default function InformasiEdit() {
     }
   };
 
-  const normFile = (e: any) => Array.isArray(e) ? e : e?.fileList;
+  const normFile = (e: any) => {
+    if (!e) return [];
+    if (Array.isArray(e)) return e;
+    return e.fileList || [];
+  };  
 
   return (
     <Edit saveButtonProps={{ htmlType: "submit", form: "informasi-edit-form" }}>
@@ -102,7 +113,6 @@ export default function InformasiEdit() {
         <Form.Item
           label="Gambar"
           name="image"
-          valuePropName="fileList"
           getValueFromEvent={normFile}
         >
           <Upload
