@@ -35,3 +35,23 @@ Route::get('/informasi/{id}', [informasiController::class, 'show']);
 Route::put('/informasi/{id}', [informasiController::class, 'update']); // disesuaikan dengan refine
 Route::patch('/informasi/{id}', [informasiController::class, 'update']);
 Route::delete('/informasi/{id}', [informasiController::class, 'destroy']);
+
+use App\Http\Controllers\Api\kegiatanController;
+
+Route::get('/kegiatan', [kegiatanController::class, 'index']);
+Route::post('/kegiatan', [kegiatanController::class, 'store']);
+Route::get('/kegiatan/{id}', [kegiatanController::class, 'show']);
+Route::post('/kegiatan/{id}', [kegiatanController::class, 'update']); // PATCH via _method
+Route::put('/kegiatan/{id}', [kegiatanController::class, 'update']);
+Route::patch('/kegiatan/{id}', [kegiatanController::class, 'update']);
+Route::delete('/kegiatan/{id}', [kegiatanController::class, 'destroy']);
+
+use App\Http\Controllers\Api\transaksiController;
+
+Route::get('/transaksi', [transaksiController::class, 'index']);
+Route::post('/transaksi', [transaksiController::class, 'store']);
+Route::get('/transaksi/{id}', [transaksiController::class, 'show']);
+Route::post('/transaksi/{id}', [transaksiController::class, 'update']); // PATCH via _method
+Route::put('/transaksi/{id}', [transaksiController::class, 'update']);
+Route::patch('/transaksi/{id}', [transaksiController::class, 'update']);
+Route::delete('/transaksi/{id}', [transaksiController::class, 'destroy']);

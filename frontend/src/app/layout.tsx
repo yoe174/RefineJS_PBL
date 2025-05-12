@@ -63,11 +63,11 @@ export default function RootLayout({
                         },
                       },
                       {
-                        name: "keuangan",
-                        list: "/keuangan",
-                        create: "/keuangan/create",
-                        edit: "/keuangan/edit/:id",
-                        show: "/keuangan/show/:id",
+                        name: "transaksi",
+                        list: "/transaksi",
+                        create: "/transaksi/create",
+                        edit: "/transaksi/edit/:id",
+                        show: "/transaksi/show/:id",
                         icon: <DollarOutlined />,
                         options: {
                           label: "Keuangan",
