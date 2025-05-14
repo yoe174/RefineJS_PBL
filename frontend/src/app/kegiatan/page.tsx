@@ -10,7 +10,7 @@ dayjs.locale("id");
 
 export default function KegiatanList() {
   const { tableProps } = useTable({
-    resource: "kegiatan", // sesuaikan dengan route backend
+    resource: "kegiatan",
   });
 
   return (
@@ -18,14 +18,6 @@ export default function KegiatanList() {
       <Table {...tableProps} rowKey="kegiatan_id">
         <Table.Column title="ID" dataIndex="kegiatan_id" key="kegiatan_id" />
         <Table.Column title="Nama Kegiatan" dataIndex="nama_kegiatan" key="nama_kegiatan" />
-        {/* <Table.Column
-          title="Isi"
-          dataIndex="isi"
-          key="isi"
-          render={(isi: string) =>
-            isi.length > 100 ? isi.slice(0, 100) + "..." : isi
-          }
-        /> */}
         <Table.Column
           title="Tanggal"
           dataIndex="tanggal"
@@ -61,11 +53,12 @@ export default function KegiatanList() {
           dataIndex="status"
           key="status"
           render={(status: string) => {
-            let color =
+            const color =
               status === "dijadwalkan" ? "yellow" :
               status === "dilaksanakan" ? "blue" :
-              status === "selesai" ? "green" : "green";
-              status === "dibatalkan" ? "green" : "red";
+              status === "selesai" ? "green" :
+              status === "dibatalkan" ? "red" :
+              "gray";
 
             return <Tag color={color}>{status}</Tag>;
           }}

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\userModel;
 use Illuminate\Http\Request;
 
-class userController extends Controller
+class userControllerOld extends Controller
 {
     // Menampilkan daftar semua user
     public function index()
