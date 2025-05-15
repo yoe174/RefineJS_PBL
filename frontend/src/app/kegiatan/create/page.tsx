@@ -9,6 +9,7 @@ import {
   Button,
   message,
   TimePicker,
+  DatePicker,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useState } from "react";
@@ -16,8 +17,6 @@ import type { UploadFile } from "antd/es/upload/interface";
 import axios from "axios";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
-// import { Calendar } from "@refinedev/antd";
-import { Calendar } from "antd";
 
 export default function KegiatanCreate() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -72,29 +71,20 @@ export default function KegiatanCreate() {
         </Form.Item>
 
         <Form.Item label="Tanggal" name="tanggal" rules={[{ required: true }]}>
-          <Calendar />
+          <DatePicker style={{ width: "100%" }} />
         </Form.Item>
 
         <Form.Item label="Waktu Mulai" name="waktu_mulai">
-          <TimePicker format="HH:mm" />
+          <TimePicker style={{ width: "100%" }} format="HH:mm" />
         </Form.Item>
 
         <Form.Item label="Waktu Selesai" name="waktu_selesai">
-          <TimePicker format="HH:mm" />
+          <TimePicker style={{ width: "100%" }} format="HH:mm" />
         </Form.Item>
 
         <Form.Item label="Lokasi" name="lokasi" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-
-        {/* <Form.Item label="Status" name="status" rules={[{ required: true }]}>
-          <Select>
-            <Select.Option value="dijadwalkan">Dijadwalkan</Select.Option>
-            <Select.Option value="dilaksanakan">Dilaksanakan</Select.Option>
-            <Select.Option value="selesai">Selesai</Select.Option>
-            <Select.Option value="dibatalkan">Dibatalkan</Select.Option>
-          </Select>
-        </Form.Item> */}
 
         <Form.Item
           label="Gambar"

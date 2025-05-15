@@ -191,6 +191,7 @@ class KegiatanController extends Controller
             'waktu_mulai' => 'nullable',
             'waktu_selesai' => 'nullable',
             'lokasi' => 'required|string',
+            'status' => 'required|string|in:dijadwalkan,dilaksanakan,selesai,dibatalkan', // validasi status
             'image' => 'nullable|image|max:2048',
         ]);
 
@@ -241,6 +242,21 @@ class KegiatanController extends Controller
         }
 
         // Update status otomatis
+        // $today = Carbon::now()->startOfDay();
+        // $tanggal = Carbon::parse($data['tanggal'])->startOfDay();
+
+        // if ($tanggal->greaterThan($today)) {
+        //     $data['status'] = 'dijadwalkan';
+        // } elseif ($tanggal->equalTo($today)) {
+        //     $data['status'] = 'dilaksanakan';
+        // } else {
+        //     $data['status'] = 'selesai';
+        // }
+
+        if ($request->has('status')) {
+        $data['status'] = $request->status; // pakai status dari frontend
+        } else {
+        // fallback jika tidak ada status, set otomatis
         $today = Carbon::now()->startOfDay();
         $tanggal = Carbon::parse($data['tanggal'])->startOfDay();
 
@@ -251,6 +267,7 @@ class KegiatanController extends Controller
         } else {
             $data['status'] = 'selesai';
         }
+    }
 
         $kegiatan->update($data);
         return response()->json($kegiatan);
