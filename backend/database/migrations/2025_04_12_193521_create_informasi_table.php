@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('judul');
             $table->text('isi'); 
             $table->enum('status',['aktif','arsip'])->default('aktif'); 
-            $table->string('image')->nullable(); 
+            $table->string('image')->nullable();
+            $table->text('keterangan')->nullable(); 
             $table->timestamps();
         });
     }
