@@ -20,7 +20,8 @@ return new class extends Migration
             $table->time('waktu_selesai')->nullable(); 
             $table->string('lokasi'); 
             $table->enum('status',['dijadwalkan','dilaksanakan','selesai','dibatalkan'])->default('dijadwalkan'); 
-            $table->string('image')->nullable(); 
+            $table->string('image')->nullable();
+            $table->text('keterangan')->nullable(); 
             $table->timestamps();
         });
     }

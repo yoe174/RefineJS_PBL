@@ -18,5 +18,6 @@ class informasiModel extends Model
         'isi',
         'status',
         'image',
+        'keterangan',
     ];
 }
