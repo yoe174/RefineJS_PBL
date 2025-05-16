@@ -22,5 +22,6 @@ class kegiatanModel extends Model
         'lokasi',
         'status',
         'image',
+        'keterangan',
     ];
 }

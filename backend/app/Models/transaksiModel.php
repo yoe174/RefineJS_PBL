@@ -20,9 +20,10 @@ class transaksiModel extends Model
         'sumber',
         'mengetahui',
         'status',
+        'keterangan',
     ];
 
-    public function jenisTransaksi()
+    public function jenis_transaksi()
 {
     return $this->belongsTo(jenisTransaksiModel::class, 'jenis_transaksi_id', 'jenis_transaksi_id');
 }

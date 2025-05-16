@@ -26,10 +26,4 @@ class userModel extends Model
         return $this->belongsTo(roleModel::class, 'role_id', 'role_id');
     }
 
-    public function index()
-    {
-        $users = userModel::all();
-        return response()->json($users); // Pastikan ini mengembalikan JSON
-        
-    }
 }
