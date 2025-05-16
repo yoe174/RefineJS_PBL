@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sumber')->nullable()->default('hamba Allah');
             $table->string('mengetahui');
             $table->enum('status', ['draft', 'valid'])->default('draft');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
 
             $table->foreign('jenis_transaksi_id')->references('jenis_transaksi_id')->on('jenis_transaksi');
