@@ -26,6 +26,7 @@ export default function KegiatanEdit() {
     formData.append("waktu_selesai", values.waktu_selesai?.format("HH:mm") || "");
     formData.append("lokasi", values.lokasi);
     formData.append("status", values.status);
+    formData.append("keterangan", values.keterangan);
 
 
     if (values.image?.[0]?.originFileObj) {
@@ -135,6 +136,13 @@ export default function KegiatanEdit() {
           >
             <Button icon={<UploadOutlined />}>Upload Gambar</Button>
           </Upload>
+        </Form.Item>
+
+        <Form.Item
+          label="Keterangan"
+          name="keterangan"
+        >
+          <Input.TextArea rows={5} />
         </Form.Item>
       </Form>
     </Edit>

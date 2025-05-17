@@ -82,6 +82,9 @@ export default function KegiatanShow() {
           ? dayjs(record.updated_at).format("DD MMMM YYYY - HH:mm")
           : "-"}
       </Paragraph>
+
+      <Title level={5}>Keterangan</Title>
+      <TextField value={record?.keterangan} />
     </Show>
   );
 }

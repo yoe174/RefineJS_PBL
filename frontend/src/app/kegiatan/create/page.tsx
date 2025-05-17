@@ -31,6 +31,7 @@ export default function KegiatanCreate() {
     formData.append("waktu_selesai", values.waktu_selesai?.format("HH:mm") ?? "");
     formData.append("lokasi", values.lokasi);
     formData.append("status", values.status);
+    formData.append("keterangan", values.keterangan);
 
     const file = values.image?.[0]?.originFileObj;
     if (file) {
@@ -108,6 +109,11 @@ export default function KegiatanCreate() {
             <Button icon={<UploadOutlined />}>Upload Gambar</Button>
           </Upload>
         </Form.Item>
+
+        <Form.Item label="Keterangan" name="keterangan">
+          <Input.TextArea rows={5} />
+        </Form.Item>
+
       </Form>
     </Create>
   );
