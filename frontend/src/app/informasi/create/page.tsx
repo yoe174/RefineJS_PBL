@@ -16,6 +16,7 @@ export default function InformasiCreate() {
     formData.append("judul", values.judul);
     formData.append("isi", values.isi);
     formData.append("status", values.status);
+    formData.append("keterangan", values.keterangan);
 
     const file = values.image?.[0]?.originFileObj;
     if (file) {
@@ -95,6 +96,13 @@ export default function InformasiCreate() {
           >
             <Button icon={<UploadOutlined />}>Upload Gambar</Button>
           </Upload>
+        </Form.Item>
+
+        <Form.Item
+          label="Keterangan"
+          name="keterangan"
+        >
+          <Input.TextArea rows={5} />
         </Form.Item>
       </Form>
     </Create>
