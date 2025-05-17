@@ -141,6 +141,8 @@ class KegiatanController extends Controller
             'waktu_selesai' => 'nullable',
             'lokasi' => 'required|string',
             'image' => 'nullable|image|max:2048',
+            'keterangan' => 'nullable',
+            
         ]);
 
         $data = $request->only([
@@ -150,6 +152,7 @@ class KegiatanController extends Controller
             'waktu_mulai',
             'waktu_selesai',
             'lokasi',
+            'keterangan',
         ]);
 
         // Simpan gambar jika ada
@@ -193,6 +196,7 @@ class KegiatanController extends Controller
             'lokasi' => 'required|string',
             'status' => 'required|string|in:dijadwalkan,dilaksanakan,selesai,dibatalkan', // validasi status
             'image' => 'nullable|image|max:2048',
+            'keterangan' => 'nullable',
         ]);
 
         // $data = $request->only([
@@ -211,6 +215,7 @@ class KegiatanController extends Controller
             'waktu_mulai' => $request->waktu_mulai,
             'waktu_selesai' => $request->waktu_selesai,
             'lokasi' => $request->lokasi,
+            'keterangan' => $request->keterangan,
         ];
 
         // // Simpan gambar baru jika ada
