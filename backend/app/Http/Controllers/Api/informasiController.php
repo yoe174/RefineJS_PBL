@@ -21,7 +21,8 @@ class informasiController extends Controller
             'judul' => 'required|string|max:255',
             'isi' => 'required',
             'status' => 'required|in:aktif,arsip',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'keterangan' => 'nullable',
         ]);
 
         $imagePath = null;
@@ -35,6 +36,7 @@ class informasiController extends Controller
             'isi' => $request->isi,
             'status' => $request->status,
             'image' => $imagePath,
+            'keterangan' => $request->keterangan,
         ]);
 
         return response()->json([
@@ -57,13 +59,15 @@ class informasiController extends Controller
             'judul' => 'required|string|max:255',
             'isi' => 'required',
             'status' => 'required|in:aktif,arsip',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'keterangan' => 'nullable',
         ]);
 
         $data = [
             'judul' => $request->judul,
             'isi' => $request->isi,
             'status' => $request->status,
+            'keterangan' => $request->keterangan,
         ];
 
         // Hapus gambar jika ada flag remove_image dan tidak upload gambar baru

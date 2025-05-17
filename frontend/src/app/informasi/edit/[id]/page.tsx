@@ -38,6 +38,7 @@ export default function InformasiEdit() {
     formData.append("judul", values.judul);
     formData.append("isi", values.isi);
     formData.append("status", values.status);
+    formData.append("keterangan", values.keterangan);
 
     const imageList = Array.isArray(values.image) ? values.image : [];
     const file = imageList[0]?.originFileObj;
@@ -131,6 +132,13 @@ export default function InformasiEdit() {
           >
             <Button icon={<UploadOutlined />}>Upload Gambar</Button>
           </Upload>
+        </Form.Item>
+        
+        <Form.Item
+          label="Keterangan"
+          name="keterangan"
+        >
+          <Input.TextArea rows={5} />
         </Form.Item>
       </Form>
     </Edit>
