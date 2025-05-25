@@ -1,3 +1,4 @@
+// src\app\admin\user\show\[id]
 "use client";
 
 import { Show, TextField } from "@refinedev/antd";

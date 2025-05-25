@@ -50,8 +50,19 @@ use App\Http\Controllers\Api\transaksiController;
 
 Route::get('/transaksi', [transaksiController::class, 'index']);
 Route::post('/transaksi', [transaksiController::class, 'store']);
+Route::get('/transaksi/summary', [transaksiController::class, 'summary']);
 Route::get('/transaksi/{id}', [transaksiController::class, 'show']);
 Route::post('/transaksi/{id}', [transaksiController::class, 'update']); // PATCH via _method
 Route::put('/transaksi/{id}', [transaksiController::class, 'update']);
 Route::patch('/transaksi/{id}', [transaksiController::class, 'update']);
 Route::delete('/transaksi/{id}', [transaksiController::class, 'destroy']);
+
+use App\Http\Controllers\Api\jenisTransaksiController;
+
+Route::get('/jenis_transaksi', [jenisTransaksiController::class, 'index']);
+Route::post('/jenisTransaksi', [jenisTransaksiController::class, 'store']);
+Route::get('/jenis_transaksi/{id}', [jenisTransaksiController::class, 'show']);
+Route::post('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'update']); // PATCH via _method
+Route::put('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'update']);
+Route::patch('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'update']);
+Route::delete('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'destroy']);

@@ -1,3 +1,4 @@
+// src\app\admin\user\layout.tsx
 import { Header } from "@components/header";
 import { authProviderServer } from "@providers/auth-provider/auth-provider.server";
 import { ThemedLayoutV2 } from "@refinedev/antd";
@@ -8,9 +9,9 @@ export default async function Layout({ children }: React.PropsWithChildren) {
   const data = await getData();
 
   // Memeriksa apakah pengguna sudah terautentikasi
-  if (!data.authenticated) {
-    return redirect(data?.redirectTo || "/login");
-  }
+  // if (!data.authenticated) {
+  //   return redirect(data?.redirectTo || "/login");
+  // }
 
   // Memeriksa apakah pengguna memiliki role yang sesuai
 //   if (!data.hasRequiredRole) {

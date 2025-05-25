@@ -6,7 +6,7 @@ body {
 }
 
 .web-header {
-  background: #0070f3;
+  background: hsl(117, 100%, 48%);
   padding: 1rem;
   color: white;
   text-align: center;

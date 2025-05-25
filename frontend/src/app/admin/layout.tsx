@@ -1,18 +1,17 @@
 // src\app\admin\layout.tsx
 import { withAdminPrefix } from "@utils/resourceWithPrefix"; // path ini sesuaikan dengan tempat kamu simpan file-nya
 import { useNotificationProvider } from "@refinedev/antd";
-import { GitHubBanner, Refine } from "@refinedev/core";
+import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import routerProvider from "@refinedev/nextjs-router";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React, { Suspense } from "react";
-import { LockOutlined,
+import {
   DollarOutlined,
   InfoCircleOutlined,
   CalendarOutlined,
   BookOutlined,
-  HeartOutlined,
   UserOutlined,
   EnvironmentOutlined,
   HomeOutlined, } from "@ant-design/icons";
@@ -118,17 +117,17 @@ export default function RootLayout({
                           label: "Tempat Reservasi",
                         },
                       },
-                      {
-                        name: "donasi",
-                        list: "/donasi",
-                        create: "/donasi/create",
-                        edit: "/donasi/edit/:id",
-                        show: "/donasi/show/:id",
-                        icon: <HeartOutlined />,
-                        options: {
-                          label: "Donasi",
-                        },
-                      },
+                      // {
+                      //   name: "donasi",
+                      //   list: "/donasi",
+                      //   create: "/donasi/create",
+                      //   edit: "/donasi/edit/:id",
+                      //   show: "/donasi/show/:id",
+                      //   icon: <HeartOutlined />,
+                      //   options: {
+                      //     label: "Donasi",
+                      //   },
+                      // },
                       {
                         name: "user",
                         list: "/user",
@@ -160,17 +159,17 @@ export default function RootLayout({
                       //     canDelete: true,
                       //   },
                       // },
-                      {
-                        name: "role",
-                        list: "/role",
-                        create: "/role/create",
-                        edit: "/role/edit/:id",
-                        show: "/role/show/:id",
-                        icon: <LockOutlined />,
-                        options: {
-                          label: "Role",
-                        },
-                      },
+                      // {
+                      //   name: "role",
+                      //   list: "/role",
+                      //   create: "/role/create",
+                      //   edit: "/role/edit/:id",
+                      //   show: "/role/show/:id",
+                      //   icon: <LockOutlined />,
+                      //   options: {
+                      //     label: "Role",
+                      //   },
+                      // },
                     ])}
                     options={{
                       syncWithLocation: true,

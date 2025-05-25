@@ -8,9 +8,10 @@ export default async function Layout({ children }: React.PropsWithChildren) {
   const data = await getData();
 
   // Memeriksa apakah pengguna sudah terautentikasi
-  if (!data.authenticated) {
-    return redirect(data?.redirectTo || "/login");
-  }
+
+  // if (!data.authenticated) {
+  //   return redirect(data?.redirectTo || "/login");
+  // }
 
   // Jika pengguna terautentikasi dan memiliki role yang sesuai, tampilkan layout
   return <ThemedLayoutV2 Header={Header}>{children}</ThemedLayoutV2>;

@@ -4,7 +4,7 @@ import { Header, ThemedLayoutV2 } from "@refinedev/antd";
 import { Typography } from "antd";
 // import { HomeOutlined } from "@ant-design/icons";
 
-export default function HomePage({ children }: React.PropsWithChildren) {
+export default function HomePage() {
   return (
     // <ThemedLayoutV2 Header={Header}
     // //   siderProps={{
