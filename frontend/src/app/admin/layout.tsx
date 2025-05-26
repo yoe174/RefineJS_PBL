@@ -21,6 +21,7 @@ import { ColorModeContextProvider } from "@contexts/color-mode";
 import { authProviderClient } from "@providers/auth-provider/auth-provider.client";
 import { dataProvider } from "@providers/data-provider";
 import "@refinedev/antd/dist/reset.css";
+import { FullScreenLoader } from "@/components/FullScreenLoader";
 
 export const metadata: Metadata = {
   title: "Si Masjid",
@@ -43,11 +44,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Suspense>
-          {/* <GitHubBanner /> */}
+          <Suspense fallback={<FullScreenLoader />}></Suspense>
           <RefineKbarProvider>
             <AntdRegistry>
               <ColorModeContextProvider defaultMode={defaultMode}>
-                {/* <DevtoolsProvider> */}
+                
                   <Refine
                     routerProvider={routerProvider}
                     dataProvider={dataProvider}
@@ -182,7 +183,7 @@ export default function RootLayout({
                     {children}
                     <RefineKbar />
                   </Refine>
-                {/* </DevtoolsProvider> */}
+                
               </ColorModeContextProvider>
             </AntdRegistry>
           </RefineKbarProvider>

@@ -8,7 +8,8 @@ export default async function Login() {
   const data = await getData();
 
   if (data.authenticated) {
-    redirect(data?.redirectTo || prefixAdminPath("/"));
+    // redirect(data?.redirectTo || prefixAdminPath("/"));
+    redirect(data?.redirectTo || "admin/");
   }
 
   return <AuthPage type="login" />;
