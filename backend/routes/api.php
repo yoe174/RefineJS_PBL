@@ -66,3 +66,13 @@ Route::post('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'update'])
 Route::put('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'update']);
 Route::patch('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'update']);
 Route::delete('/jenisTransaksi/{id}', [jenisTransaksiController::class, 'destroy']);
+
+use App\Http\Controllers\Api\tempatReservasiController;
+
+Route::get('/tempat_reservasi', [tempatReservasiController::class, 'index']);
+Route::post('/tempat_reservasi', [tempatReservasiController::class, 'store']);
+Route::get('/tempat_reservasi/{id}', [tempatReservasiController::class, 'show']);
+Route::post('/tempat_reservasi/{id}', [tempatReservasiController::class, 'update']); // PATCH via _method
+Route::put('/tempat_reservasi/{id}', [tempatReservasiController::class, 'update']);
+Route::patch('/tempat_reservasi/{id}', [tempatReservasiController::class, 'update']);
+Route::delete('/tempat_reservasi/{id}', [tempatReservasiController::class, 'destroy']);
