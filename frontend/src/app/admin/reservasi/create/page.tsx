@@ -1,109 +1,108 @@
+// src\app\admin\reservasi\create
+
 "use client";
 
-import { Create, useForm } from "@refinedev/antd";
-import { Form, Input, Select, Upload, Button, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import { useState } from "react";
-import type { UploadFile } from "antd/es/upload/interface";
+import { Create, useForm, useSelect } from "@refinedev/antd";
+import {
+  Form,
+  Input,
+  Select,
+  message,
+  InputNumber,
+  TimePicker,
+  DatePicker,
+} from "antd";
 import axios from "axios";
 
-export default function InformasiCreate() {
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+export default function ReservasiCreate() {
   const { formProps, form, redirect } = useForm();
+
+  const { selectProps: tempatSelectProps } = useSelect({
+    resource: "tempat_reservasi", // Sesuai route endpoint kamu
+    optionLabel: "lokasi", // Nama field yang mau ditampilkan
+    optionValue: "tempat_reservasi_id",   // Nama field yang dikirim ke server
+  });
 
   const handleFinish = async (values: any) => {
     const formData = new FormData();
-    formData.append("judul", values.judul);
-    formData.append("isi", values.isi);
-    formData.append("status", values.status);
-    formData.append("keterangan", values.keterangan);
-
-    const file = values.image?.[0]?.originFileObj;
-    if (file) {
-      formData.append("image", file);
-    }
+    formData.append("nama_pemesan", values.nama_pemesan);
+    formData.append("kontak_pemesan", values.kontak_pemesan);
+    formData.append("tempat_reservasi_id", values.tempat_reservasi_id);
+    formData.append("nama_acara", values.nama_acara);
+    formData.append("tanggal_acara", values.tanggal_acara.format("YYYY-MM-DD"));
+    formData.append("waktu_mulai", values.waktu_mulai?.format("HH:mm") ?? "");
+    formData.append("waktu_selesai", values.waktu_selesai?.format("HH:mm") ?? "");
+    formData.append("jumlah_tamu", values.jumlah_tamu ?? "");
+    formData.append("mengetahui", values.mengetahui ?? "");
+    formData.append("keterangan", values.keterangan ?? "");
 
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/informasi`, formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/reservasi`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      message.success("Informasi berhasil ditambahkan");
-      redirect("list", "informasi"); // kembali ke list
+      message.success("Reservasi berhasil dibuat");
+      redirect("list", "reservasi");
     } catch (error: any) {
-      message.error("Gagal menambahkan informasi");
+      message.error("Gagal membuat reservasi");
       console.error(error);
     }
   };
 
-  const normFile = (e: any) => Array.isArray(e) ? e : e?.fileList;
-
   return (
-    <Create saveButtonProps={{ htmlType: "submit", form: "informasi-form" }}>
+    <Create saveButtonProps={{ htmlType: "submit", form: "reservasi-form" }}>
       <Form
         {...formProps}
         layout="vertical"
-        id="informasi-form"
+        id="reservasi-form"
         form={form}
         onFinish={handleFinish}
       >
+        <Form.Item label="Tanggal" name="tanggal_acara" rules={[{ required: true }]}>
+          <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+
         <Form.Item
-          label="Judul"
-          name="judul"
+          label="Tempat"
+          name="tempat_reservasi_id"
           rules={[{ required: true }]}
         >
+          <Select {...tempatSelectProps} />
+        </Form.Item>
+
+        <Form.Item
+          label="Nama Pemesan" name="nama_pemesan" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="Isi"
-          name="isi"
-          rules={[{ required: true }]}
-        >
+          label="Kontak Pemesan" name="kontak_pemesan" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Nama Acara" name="nama_acara" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item label="Waktu Mulai" name="waktu_mulai">
+          <TimePicker style={{ width: "100%" }} format="HH:mm" />
+        </Form.Item>
+
+        <Form.Item label="Waktu Selesai" name="waktu_selesai">
+          <TimePicker style={{ width: "100%" }} format="HH:mm" />
+        </Form.Item>
+
+        <Form.Item
+          label="Jumlah tamu" name="jumlah_tamu" rules={[{ required: false, type:"number" }]}>
+          <InputNumber style={{ width: "100%" }} />
+        </Form.Item>
+
+        <Form.Item label="Keterangan" name="keterangan">
           <Input.TextArea rows={5} />
         </Form.Item>
 
-        <Form.Item
-          label="Status"
-          name="status"
-          rules={[{ required: true }]}
-        >
-          <Select>
-            <Select.Option value="aktif">Aktif</Select.Option>
-            <Select.Option value="arsip">Arsip</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item
-          label="Gambar"
-          name="image"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-        >
-          <Upload
-            listType="picture"
-            beforeUpload={(file) => {
-                const isImage = file.type.startsWith("image/");
-                if (!isImage) {
-                  message.error("Hanya file gambar yang diperbolehkan!");
-                }
-                return isImage || Upload.LIST_IGNORE; // Tolak jika bukan gambar
-              }}
-              accept="image/*"
-              maxCount={1}
-              onChange={({ fileList }) => setFileList(fileList)}
-          >
-            <Button icon={<UploadOutlined />}>Upload Gambar</Button>
-          </Upload>
-        </Form.Item>
-
-        <Form.Item
-          label="Keterangan"
-          name="keterangan"
-        >
-          <Input.TextArea rows={5} />
-        </Form.Item>
       </Form>
     </Create>
   );

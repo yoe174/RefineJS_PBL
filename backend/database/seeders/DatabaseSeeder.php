@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         transaksiSeeder::class,
         informasiSeeder::class,
         kegiatanSeeder::class,
+        tempatReservasiSeeder::class,
+        reservasiSeeder::class,
         // tambahkan seeder lainnya di sini
     ]);
     }

@@ -24,13 +24,13 @@ class reservasiModel extends Model
         'jumlah_tamu',
         'status_reservasi',
         'mengetahui',
-        'tagihan',
-        'status_pembayaran',
+        // 'tagihan',
+        // 'status_pembayaran',
         'keterangan',
-        'masuk_transaksi',
+        // 'masuk_transaksi',
     ];
 
-    public function tempatReservasi()
+    public function tempat()
     {
         return $this->belongsTo(tempatReservasiModel::class, 'tempat_reservasi_id', 'tempat_reservasi_id');
     }
